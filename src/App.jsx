@@ -1,7 +1,9 @@
+import AddUser from './components/User/AddUser';
+
 function App() {
   return (
     <div className='App'>
-      <h1>Sanity Check</h1>
+      <AddUser />
     </div>
   );
 }
