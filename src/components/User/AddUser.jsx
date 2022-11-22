@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Card from '../UI/Card';
 
-function AddUser() {
+function AddUser({ handleAddUser }) {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
 
@@ -13,13 +13,13 @@ function AddUser() {
     setAge(e.target.value);
   };
 
-  const handleAddUser = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (username.trim().length === 0 || age.trim().length === 0) return;
     if (+age < 0) return;
 
-    console.log(username, age);
+    handleAddUser({ name: username, age });
 
     setAge('');
     setUsername('');
@@ -27,7 +27,7 @@ function AddUser() {
 
   return (
     <Card>
-      <form onSubmit={handleAddUser} className='flex flex-col gap-2'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
         <label htmlFor='username'>Username</label>
         <input
           type='text'
@@ -44,7 +44,11 @@ function AddUser() {
           onChange={handleAgeInput}
           value={age}
         />
-        <button type='submit'>Add User</button>
+        <button
+          type='submit'
+          className='place-self-center border px-2 py-1 rounded-md text-white font-medium bg-black'>
+          Add User
+        </button>
       </form>
     </Card>
   );
